@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+<style>
+.vn {display:inline}
+.poetry {padding-left:20px; display:inline}
+
+.vn + .bodytext{color:red}
+
+</style>
+
+
+<input class="bookName" value="Matthew">
+<input class="verseNumber" value="6:1-34">
+
+<button class="getVerses">Get Verses</button>
+
+
+<h3>Example</h3>
+Matthew 6:
+
+<p class="vn">1</p> <p class="bodytext"> “Be careful not to display your righteousness merely to be seen by people. Otherwise you have no reward with your Father in heaven. 
+<p class="vn">2</p> Thus whenever you do charitable giving, do not blow a trumpet before you, as the hypocrites do in synagogues and on streets so that people will praise them. I tell you the truth, they have their reward! 
+<p class="vn">3</p> But when you do your giving, do not let your left hand know what your right hand is doing, 
+<p class="vn">4</p> so that your gift may be in secret. And your Father, who sees in secret, will reward you. </p>
+
+<p class="vn">5</p> <p class="bodytext"> “Whenever you pray, do not be like the hypocrites, because they love to pray while standing in synagogues and on street corners so that people can see them. Truly I say to you, they have their reward! 
+<p class="vn">6</p> But whenever you pray, go into your inner room, close the door, and pray to your Father in secret. And your Father, who sees in secret, will reward you. 
+<p class="vn">7</p> When you pray, do not babble repetitiously like the Gentiles, because they think that by their many words they will be heard. 
+<p class="vn">8</p> Do not be like them, for your Father knows what you need before you ask him. 
+<p class="vn">9</p> So pray this way: <p class="poetry">Our Father in heaven, may your name be honored, </p>
+
+<p class="vn">10</p> <p class="poetry"> may your kingdom come, <p class="poetry">may your will be done on earth as it is in heaven.</p>
+
+<p class="vn">11</p> <p class="poetry">Give us today our daily bread, </p>
+<p class="vn">12</p> <p class="poetry">and forgive us our debts, as we ourselves have forgiven our debtors. </p>
+
+<p class="vn">13</p> <p class="poetry">And do not lead us into temptation, but deliver us from the evil one. </p>
+
+<p class="vn">14</p> <p class="bodytext"> “For if you forgive others their sins, your heavenly Father will also forgive you. 
+<p class="vn">15</p> But if you do not forgive others, your Father will not forgive you your sins. </p>
+
+<p class="vn">16</p> <p class="bodytext"> “When you fast, do not look sullen like the hypocrites, for they make their faces unattractive so that people will see them fasting. I tell you the truth, they have their reward! 
+<p class="vn">17</p> When you fast, anoint your head and wash your face, 
+<p class="vn">18</p> so that it will not be obvious to others when you are fasting, but only to your Father who is in secret. And your Father, who sees in secret, will reward you. </p>
+
+<p class="vn">19</p> <p class="bodytext"> “Do not accumulate for yourselves treasures on earth, where moth and devouring insect destroy and where thieves break in and steal. 
+<p class="vn">20</p> But accumulate for yourselves treasures in heaven, where moth and devouring insect do not destroy, and thieves do not break in and steal. 
+<p class="vn">21</p> For where your treasure is, there your heart will be also. </p>
+
+<p class="vn">22</p> <p class="bodytext"> “The eye is the lamp of the body. If then your eye is healthy, your whole body will be full of light.
+<p class="vn">23</p> But if your eye is diseased, your whole body will be full of darkness. If then the light in you is darkness, how great is the darkness! </p>
+
+<p class="vn">24</p> <p class="bodytext"> “No one can serve two masters, for either he will hate the one and love the other, or he will be devoted to the one and despise the other. You cannot serve God and money. </p>
+
+<p class="vn">25</p> <p class="bodytext"> “Therefore I tell you, do not worry about your life, what you will eat or drink, or about your body, what you will wear. Isn’t there more to life than food and more to the body than clothing? 
+<p class="vn">26</p> Look at the birds in  the sky: They do not sow, or reap, or gather into barns, yet your heavenly Father feeds them. Aren’t you more valuable than they are?
+<p class="vn">27</p> And which of you by worrying can add even one hour to his life? 
+<p class="vn">28</p> Why do you worry about clothing? Think about how the flowers of the field grow; they do not work or spin. 
+<p class="vn">29</p> Yet I tell you that not even Solomon in all his glory was clothed like one of these! 
+<p class="vn">30</p> And if this is how God clothes the wild grass, which is here today and tomorrow is tossed into the fire to heat the oven, won’t he clothe you even more, you people of little faith? 
+<p class="vn">31</p> So then, don’t worry saying, ‘What will we eat?’ or ‘What will we drink?’ or ‘What will we wear?’ 
+<p class="vn">32</p> For the unconverted pursue these things, and your heavenly Father knows that you need them. 
+<p class="vn">33</p> But above all pursue his kingdom and righteousness, and all these things will be given to you as well.
+<p class="vn">34</p> So then, do not worry about tomorrow, for tomorrow will worry about itself. Today has enough trouble of its own. </p> 
+
+
+
+
+<div class="result"></div>
+
+
+
+
+<script>
+$(function(){
+    var b = 'John';
+    var v = '3:16';
+    var dataString;
+
+    $('.getVerses').on('click', function(){
+        b = $('.bookName').val();
+        v = $('.verseNumber').val();
+        console.log(b,v);
+
+
+        ajaxCall(b,v);
+    });
+
+
+    function dostuff( data ) {
+        console.log(data);
+
+        for (let index = 0; index < data.length; index++) {
+            console.log(data.length)
+            dataString += data[index].bookname + ' ' + data[index].chapter + ':' +'<p class="vn">'+ data[index].verse +'</p>' + ' ' + data[index].text;
+        }
+
+
+        $(".result").html(dataString);
+
+        console.log(dataString);
+    }
+
+
+
+    function ajaxCall( book, verse ) {
+        $.getJSON( "https://labs.bible.org/api/?passage="+b+"%20"+v+"&type=json&callback=?&formatting=para", function( ) {
+            console.log('success');
+        })
+        .done(function ( data ) {
+            // console.log(JSON.stringify(data));
+            dostuff(data);
+        })
+        .fail(function () {
+            console.log('error')
+        });
+    }
+
+
+
+
+
+
+
+
+});
+</script>
+
+
+<!-- <script>
+$(function(){
+    $.ajax({
+        method: "GET",
+        url:'https://labs.bible.org/api/?passage=John%203:16&callback=?',
+        // type: 'json',
+        dataType: 'jsonp'
+    })
+    .success(function(data){
+        console.log('data');
+
+        dataString = data[0].bookname +' '+data[0].chapter +':'+data[0].verse +' '+ data[0].text;
+
+        $( ".result" ).html( dataString );
+
+        console.log(dataString);
+    })
+    .error(function(textStatus){
+        $(".result").html(textStatus);
+    });	
+});
+</script> -->
+
+
+
+
+
+  </body>
+</html>
